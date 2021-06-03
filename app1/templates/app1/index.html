@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Hugo Murillo
+{% endblock %}
+
+{% block container %}
+
+    <div class="row mt-4">
+        <div class="col-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                <label for="monto">Monto</label>
+                <input type="numeric" name="monto" id="monto" class="form-control" placeholder="10,0000" required autofocus>
+                </div>
+                <div class="mb-3">
+                <label for="tasa">Tasa</label>
+                <input type="numeric" name="tasa" id="tasa" class="form-control" placeholder="0 - 100" required>
+                </div>
+                <div class="mb-3">
+                <label for="plazo">Plazo</label>
+                <input type="numeric" name="plazo" id="plazo" class="form-control" placeholder="En Años" required>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn-success" value="Calcular Cuota">
+                </div>
+            </form>
+        </div> 
+        <!-- Tabla -->
+        <div class="col-9" >
+            <h2>Calculo de Cuota</h2>
+            <table class="table table-striped table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th>Monto</th>
+                        <th>Tasa</th>
+                        <th>Plazo</th>
+                        <th>Cuota</th>
+                        <th>Total a pagar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for v in vista %}
+                    <tr>
+                        <th>{{v.monto}} Lps</th>
+                        <th>{{v.tasa}}%</th>
+                        <th>{{v.plazo}} meses</th>
+                        <th>{{v.cuota}} Lps</th>
+                        <th>{{v.total}} Lps</th>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
